@@ -1,0 +1,15 @@
+ 
+# docker run --name portainer -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+version: '3.9'
+services:
+    web:
+      image: portainer/portainer:latest
+      container_name: portainer
+      restart: unless-stopped
+      env_file:
+        - .env
+      ports:
+        - ${HOST_IP}:9000:9000
+      volumes:
+        - /root/portainer/data:/data
+        - /var/run/docker.sock:/var/run/docker.sock
